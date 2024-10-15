@@ -8,6 +8,7 @@ from chat.models import Language
 import uuid
 
 class TextTranMessage(models.Model):
+    # id = models.BigAutoField(primary_key=True) 
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4,editable=True)
     code = models.ForeignKey(Language, on_delete=models.CASCADE)
     text = models.TextField()
@@ -16,6 +17,7 @@ class TextTranMessage(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
 class MessageAI(models.Model):
+    # id = models.BigAutoField(primary_key=True) 
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4 , editable=True)
     text = models.TextField()
     text_tran = models.ManyToManyField(TextTranMessage, blank=True)
@@ -25,6 +27,7 @@ class MessageAI(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class MessageUser(models.Model):
+    # id = models.BigAutoField(primary_key=True) 
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
     text = models.TextField()
