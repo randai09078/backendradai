@@ -16,7 +16,7 @@ class Conversation(models.Model):
     user_id = models.UUIDField(blank=True, null=True)
     lang = models.ForeignKey(Language, on_delete=models.SET_NULL, blank=True, null=True)
     type = models.CharField(max_length=10, choices=settings.TYPE_CHOICES, default='text')
-    model = models.ForeignKey(ModelAI, on_delete=models.SET_NULL)
+    model = models.ForeignKey(ModelAI, on_delete=models.SET_NULL, null=True)
     prompt = models.ForeignKey(Prompt, on_delete=models.SET_NULL, blank=True, null=True)
     title = models.CharField(max_length=255)
     is_pin = models.BooleanField(default=False)
