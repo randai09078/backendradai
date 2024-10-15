@@ -142,7 +142,7 @@ COPY  . $HOME/app
 # RUN chown -R user /usr/bin/chromedriver
 
 WORKDIR $HOME/app/randapi/randai
-RUN python manage.py makemigrations
-RUN python manage.py migrate
+# RUN python manage.py makemigrations
+# RUN python manage.py migrate
 
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:7860", "--settings=randai.settings" ]
