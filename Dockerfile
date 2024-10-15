@@ -11,22 +11,22 @@ RUN pip install g4f
 
 
 
-RUN apt-get -y update && apt-get -y install nginx
+# RUN apt-get -y update && apt-get -y install nginx
 
 
-RUN pip install browser_cookie3
+# RUN pip install browser_cookie3
 # RUN  pip install g4f[webdriver]
 # RUN pip install -U g4f
-RUN apt-get update && \
-    apt-get install -y \
-        chromium \
-        chromium-driver \
-    && rm -rf /var/lib/apt/lists/*
-ENV CHROMEDRIVER_PATH /usr/lib/chromium/chromedriver
-ENV CHROME_BIN /usr/bin/chromium-browser
-RUN which chromedriver
-RUN chromedriver --version
-RUN wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+# RUN apt-get update && \
+#     apt-get install -y \
+#         chromium \
+#         chromium-driver \
+#     && rm -rf /var/lib/apt/lists/*
+# ENV CHROMEDRIVER_PATH /usr/lib/chromium/chromedriver
+# ENV CHROME_BIN /usr/bin/chromium-browser
+# RUN which chromedriver
+# RUN chromedriver --version
+# RUN wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
 
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
@@ -52,11 +52,11 @@ RUN apt-get update && apt-get install -y \
     libu2f-udev \
     libvulkan1
  # Chrome instalation 
-RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
-RUN rm google-chrome-stable_current_amd64.deb
-# Check chrome version
-RUN echo "Chrome: " && google-chrome --version
+# RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
+# RUN rm google-chrome-stable_current_amd64.deb
+# # Check chrome version
+# RUN echo "Chrome: " && google-chrome --version
 
 
 
@@ -69,11 +69,11 @@ RUN echo "Chrome: " && google-chrome --version
 
 
 # Remove java
-RUN apt-get -qyy remove openjdk-11-jre-headless
+# RUN apt-get -qyy remove openjdk-11-jre-headless
 # Cleanup
-RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
-  && apt-get -qyy autoremove \
-  && apt-get -qyy clean
+# RUN rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
+#   && apt-get -qyy autoremove \
+#   && apt-get -qyy clean
 
 
 #Install Pandoc
@@ -126,20 +126,20 @@ RUN wget https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download
 
 
 # Create a user
-RUN useradd -m -u 1000 user
+# RUN useradd -m -u 1000 user
 
-USER user
+# USER user
 
-ENV HOME=/home/user \
-    PATH=/home/user/.local/bin:$PATH
+# ENV HOME=/home/user \
+#     PATH=/home/user/.local/bin:$PATH
 
 WORKDIR $HOME/app
 
-COPY --chown=user . $HOME/app
+COPY  . $HOME/app
 # RUN bash u.sh
 
-USER root
-RUN chown -R user /usr/bin/chromedriver
+# USER root
+# RUN chown -R user /usr/bin/chromedriver
 
 WORKDIR $HOME/app/randapi/randai
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:7860", "--settings=randai.settings" ]
